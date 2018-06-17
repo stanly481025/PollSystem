@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\Stanly Chen\Desktop\PollSystem\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4264782386.index
+1291132753.index
+2858063997.index
+22020825.index
+4188697320.index
+3851494256.index

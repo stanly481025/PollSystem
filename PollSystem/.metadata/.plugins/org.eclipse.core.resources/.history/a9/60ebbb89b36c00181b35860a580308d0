@@ -1,0 +1,47 @@
+//package wbse;
+
+import java.util.ArrayList;
+
+public class Poll { //整份民調
+	private ArrayList<String> question = new ArrayList<String>(); //題目
+	private ArrayList<String> option = new ArrayList<String>(); //選項
+	private ArrayList<Integer> point = new ArrayList<Integer>(); //選項配的答題點數 
+	private ArrayList<Integer> answer; //使用者的回答
+	private int totalGainedPoint; //使用者在這份民調獲得的總點數
+
+	public Poll(){
+		this.question.clear();
+		this.answer.clear();
+		this.totalGainedPoint = 0;
+		this.option.clear();
+		this.point.clear();
+	}
+    public void setQuestion(String question){
+        this.question.add(question);
+    }
+    public void setAnswer(int answer){
+        this.answer.add(answer);
+    }
+    public void addPoint(int point){
+    	this.point.add(point);
+    }
+    public void addOption(String option){
+        this.option.add(option);
+    }
+    
+    public ArrayList<String> getQuestion(){
+        return question;
+    }
+    public ArrayList<Integer> getAnswer(){
+        return answer;
+    }
+    public ArrayList<String> getOption(){
+        return option;
+    }
+    public ArrayList<Integer> getPoint(){
+        return point;
+    }
+    public int getTotalGainedPoint() {
+    	return totalGainedPoint;
+    }
+}

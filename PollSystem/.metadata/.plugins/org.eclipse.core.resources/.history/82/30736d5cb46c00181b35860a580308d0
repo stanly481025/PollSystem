@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>PollSystemModule</display-name>
+  <description></description>
+  <servlet>
+    <servlet-name>PollServlet</servlet-name>
+    <servlet-class>wbse.PollServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PollServlet</servlet-name>
+    <url-pattern>/PollServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AnswerServlet</servlet-name>
+    <servlet-class>wbse.AnswerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AnswerServlet</servlet-name>
+    <url-pattern>/AnswerServlet</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>pollMaxNumber</param-name>
+    <param-value>100</param-value>
+  </context-param>
+  <listener>
+    <listener-class>
+            wbse.PollServletContextListener
+        </listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>

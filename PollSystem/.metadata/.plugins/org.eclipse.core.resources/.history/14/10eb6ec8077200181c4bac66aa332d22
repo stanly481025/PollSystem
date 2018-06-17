@@ -1,0 +1,19 @@
+package wbse;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AnswerServlet extends HttpServlet {
+	//使用者寫完問卷提交後來的地方
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        //取得各題答案
+        //知道回答的人是誰
+        //把資料轉成json
+        //存到資料庫
+	}
+}

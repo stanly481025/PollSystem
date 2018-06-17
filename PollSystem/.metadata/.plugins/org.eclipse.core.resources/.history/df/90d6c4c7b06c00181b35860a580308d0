@@ -1,0 +1,11 @@
+package wbse;
+
+import java.util.ArrayList;
+
+public class Question {
+	public String question;
+	public String answer;
+	public ArrayList<String> optionList;
+	public String img;
+	public String description;
+}

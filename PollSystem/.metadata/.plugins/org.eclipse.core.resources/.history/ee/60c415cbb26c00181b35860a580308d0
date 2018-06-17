@@ -1,0 +1,5 @@
+package wbse;
+
+public class ServletContext {
+
+}

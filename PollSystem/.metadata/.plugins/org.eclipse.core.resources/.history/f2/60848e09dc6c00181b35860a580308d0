@@ -1,0 +1,100 @@
+package wbse;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class ReadPoll {
+	private Scanner input;
+	private String filename = "Program_Capability_and_Writing_Habit_Investigation.txt";
+	private ArrayList<Polls> poll = new ArrayList<Polls>();
+
+	public ReadPoll(){
+
+	}
+	public ReadPoll(String filename){
+		this.filename = filename;
+	}// enable user to open file
+	
+	public void openFile ()
+	{
+		try
+		{
+			input = new Scanner(new File(filename), "utf-8");
+		} // end try
+		catch (FileNotFoundException fileNotFoundException)
+		{
+			System.err.println("Error opening file.");
+			System.exit(1);
+		} // end catch
+	} // end method openFile
+	
+	// read quiz from file
+	public void readQuestions ()
+	{
+		Polls polls;
+		try
+		// read records from file using Scanner object
+		{
+			polls = new Polls();
+			polls.setTitle(input.nextLine());
+			polls.setDescription(input.nextLine());
+			StringTokenizer tokens = new StringTokenizer(input.nextLine());
+			while(tokens.hasMoreTokens()) {
+				String token = tokens.nextToken();
+				polls.keywordList.add(token);
+			}
+			
+			String buf = input.nextLine();
+			while (input.hasNextLine())
+			{
+				Question q = new Question();
+				q.setQuestion(input.nextLine());
+				while (input.hasNextLine())
+				{
+					buf = input.nextLine();
+					//System.out.println(buf);
+					if(buf.equals("\n")) {
+						break;
+					} else {
+						String option = buf;
+						q.addOptionList(option);
+					}
+				}
+				polls.addQuestionList(q);
+			} // end while
+			poll.add(polls);
+		} // end try
+		catch (IllegalStateException stateException)
+		{
+			System.err.println("Error reading from file.");
+			System.exit(1);
+		} // end catch
+	} // end method readRecords
+	// close file and terminate application
+	public void closeFile ()
+	{
+		if (input != null)
+			input.close(); // close file
+	} // end method closeFile
+	public ArrayList<Polls> getPolls(){
+		return poll;
+	}
+	public static void main (String args[])
+	{
+		ReadPoll rp = new ReadPoll();
+		rp.openFile();
+		rp.readQuestions();
+		ArrayList<Polls> p = new ArrayList<Polls>();
+		p = rp.getPolls();
+		Polls pp = p.get(0);
+		System.out.println(pp.getQuestionList().size());
+		for(int i = 0; i < pp.getQuestionList().size(); i++){
+			System.out.println("Q:" + pp.getQuestionList().get(i).getQuestion());
+			System.out.println("Op1:" + pp.getQuestionList().get(i).getOptionList().get(10));
+		}
+		rp.closeFile();
+	}// end main
+}

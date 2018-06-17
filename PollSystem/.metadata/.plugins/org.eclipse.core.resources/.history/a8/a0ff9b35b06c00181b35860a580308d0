@@ -1,0 +1,10 @@
+package wbse;
+
+import java.util.ArrayList;
+
+public class Polls {
+	public String title;
+	public ArrayList<String> questionList;
+	public ArrayList<String> keywordList;
+	
+}

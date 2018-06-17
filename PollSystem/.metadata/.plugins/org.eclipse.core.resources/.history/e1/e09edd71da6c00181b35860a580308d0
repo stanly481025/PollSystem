@@ -1,0 +1,25 @@
+package wbse;
+
+import java.util.ArrayList;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class PollServletContextListener implements ServletContextListener {
+	public void contextInitialized(ServletContextEvent event)  { 
+		ServletContext sc = event.getServletContext();
+		int pollMaxNumber = Integer.parseInt(sc.getInitParameter("pollMaxNumber"));
+		String f = "/WEB-INF/" + pollMaxNumber + ".txt";
+        String fn = sc.getRealPath(f);
+        ReadPoll rp = new ReadPoll(fn);
+        rp.openFile();
+		rp.readQuestions();
+        rp.closeFile();
+        ArrayList<Poll> p = rp.getPolls();
+        sc.setAttribute("polls", p);
+	}
+    public void contextDestroyed(ServletContextEvent sce)  { 
+         // TODO Auto-generated method stub
+    }
+}

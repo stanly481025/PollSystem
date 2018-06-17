@@ -1,0 +1,45 @@
+package wbse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class BrowseRecordServlet extends HttpServlet {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+		String title = request.getParameter("title"); //抓標題
+        String url = request.getParameter("url"); //抓問卷連結
+        String rec = "<br/><a target='_blank' href="+url+">"+title+"</a><hr/>";
+        
+        ArrayList<String> record = (ArrayList<String>) request.getSession().getAttribute("browseRecord");
+        if(record == null) {
+        	record = new ArrayList<String>();
+        }
+        //把時間較新的放在前面
+        boolean check = false;
+        for(int i = 0; i < record.size(); i++) {
+        	if(record.get(i).equals(rec)) {
+        		check = true;
+        		break;
+        	}
+        }
+        if(check != true) {
+        	record.add(rec);
+        }
+        for(int i = 0; i < record.size(); i++) {
+        	for(int j = 1; j < record.size(); j++) {
+        		String temp = "";
+        		temp = record.get(i);
+        		record.set(i, record.get(j));
+        		record.set(j, temp);
+        	}
+        }
+        request.getSession().setAttribute("browseRecord", record); //設定瀏覽問卷到session
+        response.sendRedirect(url); //去那個問卷
+	}
+}

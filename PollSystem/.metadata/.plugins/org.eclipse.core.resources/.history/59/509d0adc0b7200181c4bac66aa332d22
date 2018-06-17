@@ -1,0 +1,26 @@
+package wbse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+public class AnswerServlet extends HttpServlet {
+	//使用者寫完問卷提交後來的地方
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        
+        ArrayList<Integer> pollAnswer = (ArrayList<Integer>) request.getSession().getAttribute("pollAnswer"); //取得各題答案
+        String userAccount = (String) request.getSession().getAttribute("account"); //知道回答的人是誰
+        Gson gson = new Gson();
+        String jsonPollAnswer = gson.toJson(pollAnswer); //把資料轉成json
+        //給DB的參數: filename, userAccount, jsonPollAnswer
+        //user_data.insertTable(filename, userAccount, jsonPollAnswer); //存到資料庫
+	}
+}
