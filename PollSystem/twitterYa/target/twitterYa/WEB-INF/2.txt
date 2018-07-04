@@ -1,0 +1,39 @@
+About your volleyball's exercise habits survey.
+sports
+Volleyball is a sport that many modern people are engaged in.How is your volleyball habit different from everyone?
+volleyball exercise sport
+
+How often do you play volleyball?
+always
+often
+sometimes
+seldom
+never
+
+Which place do you mainly play?
+Setter
+Outside Spiker
+Middle Blocker
+Opposite
+Libero
+
+How long have you been playing volleyball?
+Less than half a year
+About one year
+About three years
+About five years
+More than ten years
+
+Which country's volleyball sport do you admire most?
+Taiwan
+Japan
+Soviet Union
+United States
+Italy
+
+Which style of ball is your favorite?
+MVA200
+MVA300
+MVR290
+MVT500
+MVR230

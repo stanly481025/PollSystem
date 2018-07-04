@@ -1,0 +1,652 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.net.*" %>
+<%@ page import="pollSystem.*"%>
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <title>主頁</title>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script>
+		 
+		 var choiced = 0;  //接上後可忽略
+		 var count = 0;    //接上後可忽略
+		 var divColor = ["#FF0088", "#FF0000", "#FF5511", "FF8800", "FFBB00", "FFFF00", "BBFF00", "77FF00"];
+		 var labelName = ["main", "bonus", "entertain", "sport", "money", "policitic", "technique", "life"];
+		 var labelname = [" 首頁", " BONUS", " 娛樂", " 運動", " 財經", " 政治", " 科技", " 生活"];
+		 
+		 //左邊label動作
+		 function labelChange(i)
+		 {
+			//改label顏色
+			for(var j = 0 ; j < 8; j++)
+			{
+				document.getElementById(labelName[j]).setAttribute("class", "nchoicedL");
+			}
+			document.getElementById(labelName[i]).setAttribute("class", "choicedL");
+			//此處呼叫servlet 轉至相應類別
+			choiced = i; //接上後可忽略
+			document.title = "主頁 - " + labelname[i];
+			console.log("change to " + labelname[i]);
+		 }
+		 
+		 //新增標題
+		 function addQ()
+		 {
+			var i = 200 + (200 + 5) * count;  //間距
+			//測試內容
+			var image = "img/img.png"
+			var title = "tesssssssssssssssssst titllllllllllllllle"
+			var link = "https://google.com";
+			var content = "123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?123?";
+			//此處加入標題 連結 圖片
+			document.getElementById( "ContentDiv" ).innerHTML += "<div class = 'contentDiv' style = 'top : " + i + "px;'>"
+															  + "<img src = " + image + " class = 'contentDI'>"
+															  + "<div class = 'contentDD'><div class ='contentDDT'>" + title + "</div><div class='contentDDC'>" + content + "</div></div>"
+															  + "<a href = " + link + "><button type='button' class = 'contentDB'>填寫問卷</button></a>"
+															  + "</div>";
+			count++; //接上後可忽略
+			console.log("add");
+		 }
+		 
+		 //新增填寫紀錄
+		 function addH()
+		 {
+			var test = "測試這他媽的區塊能塞多少個字";
+			var testlink = "https://google.com";
+			//加入填寫紀錄
+			document.getElementById( "browsDD" ).innerHTML += "<a href = " + testlink + " style = 'text-decoration: none;'><p class = 'browsS'>" + test + "</p></a>";
+		 }
+		 
+		 
+		 //搜尋標題
+		 function searchClick()
+		 {
+			var x = document.getElementById( "inputL" ).value;
+			//呼叫servlet
+			document.location.href = "https://google.com/search?q=" + x;
+			console.log("click");
+		 }
+		 
+		 //載入個人資訊
+		 function setinfo()
+		 {
+			//此處載入圖片跟內容
+			//document.getElementById( "infoDD" ).;
+		 }
+		 
+		 //載入熱門關鍵字
+		 function setWord()
+		 {
+			//var word = "test";
+			var link = "https://google.com/";
+			document.getElementById( "undersearch" ).innerHTML = "推薦關鍵字 :"
+															   + "&nbsp<a href = '" + link + "search?q=世足" + "' style = 'text-decoration: none;'><red>世足</red>."
+															   + "&nbsp<a href = '" + link + "search?q=俄羅斯" + "' style = 'text-decoration: none;'><red>俄羅斯</red>."
+															   + "&nbsp<a href = '" + link + "search?q=旅遊" + "' style = 'text-decoration: none;'><red>旅遊</red>."
+															   + "&nbsp<a href = '" + link + "search?q=NBA" + "' style = 'text-decoration: none;'><red>NBA</red>";
+		 }
+		 
+		 function testQ()
+		 {
+			var countt = Math.floor(Math.random()*20)+1;
+			for(var i = 1; i < countt; i++)
+			{
+				addQ();
+			}
+		 }
+		 
+		 function testH()
+		 {
+			var countt = Math.floor(Math.random()*10)+1;
+			for(var i = 1; i < countt; i++)
+			{
+				addH();
+			}
+		 }
+		 
+		 //網頁起始設定
+         function start()
+         {
+			//改上面圖片 做好玩的
+            var x = Math.floor(Math.random()*5)+1;
+			document.getElementById( "image" ).setAttribute("style", "background-image: url('img/" + x + ".jpg');");
+			
+			//依解析度改位置
+			var w = (screen.width - 450)/2-50;
+			document.getElementById( "searchD" ).setAttribute("style", "margin-left:" + w + "px;");
+			
+			//抓熱門關鍵字  (痾，這先放著吧)
+			setWord();
+			//要設定個人資訊 setinfo()
+         }
+		 
+         window.addEventListener( "load", start, false );
+		 
+		 //回到最上層
+		$(function(){
+		//動畫方式回到上層
+		$("#gotopD").click(function(){
+			jQuery("html,body").animate({scrollTop:0},300);
+			//jQuery("html,body").animate({scrollTop: $("#labelD").offset().top},300);
+		});
+		//目前的位置距離網頁頂端，若大於300px則顯示回上層圖示;否則隱藏
+		$(window).scroll(function() {
+			if ( $(this).scrollTop() > 500){
+				$('#gotopD').fadeIn("fast");
+			} 
+			else {
+				$('#gotopD').stop().fadeOut("fast");
+			}
+		});
+		});
+      </script>
+	  <style>
+		body	{
+					font-family: Helvetica, Microsoft YaHei, LiHei Pro, TW-Kai;
+				}
+		/*熱門關鍵字*/
+		#undersearch {
+					font-size: 17px;
+				}
+		#undersearch red {
+					color: red;
+					font-weight: bold;
+				}
+		/*搜尋Div*/
+		#searchD {
+					position: absolute;
+					color: white;
+					top: 1%;
+					width: 450px;
+					height: 150px;
+					background-color: rgba(0, 0, 0, 0.5);
+					padding: 5px 5px;
+					border-radius: 20px;  /*圓角*/
+				}
+		/*搜尋條*/
+		.searchL {
+					font-size: 20px;
+				}
+		/*左邊Div*/
+		#labelD	{
+					position: absolute;
+					top: 25%;
+					left: 6%;
+					width: 7%;
+					height: 470px;
+					background-color: white;
+					padding: 5px 5px;
+					border-radius: 10px;  /*圓角*/
+					box-shadow:4px 3px 2px 1px #A42D00;
+				}
+		/*已選標籤*/
+		.choicedL  {
+					font-weight: bold;
+					color: #FF0000;
+					font-size: 20px;
+				}
+		/*未選標籤*/
+		.nchoicedL {
+					font-weight: bold;
+					color: #5599FF;
+					font-size: 20px;
+				}
+		/*中間Div*/
+		.contentDiv {
+					position: absolute;
+					left: 18%;
+					width: 50%;
+					height: 160px;
+					margin-bottom: 50px;
+					background-color: #FFFFFF; 
+					box-shadow:4px 3px 2px 1px black;
+					padding: 5px 5px;
+					border-radius: 10px;
+				}
+		.contentDI {
+					position: absolute;
+					top: 15px;
+					left: 25px;
+					height: 120px;
+					width: 120px;
+				}
+		.contentDD {
+					background-color: rgba(48, 191, 179, 0.61);
+					position: absolute;
+					top: 15px;
+					left: 160px;
+					height: 130px;
+					width: 65%;
+					padding: 5px 5px;
+					border-radius: 10px;
+				}
+		.contentDDT {
+					position: absolute;
+					top:3%;
+					left:3%;
+					width:98%;
+					height: 35px;
+					font-size: 30px;
+					color: blue;
+				}
+		.contentDDC {
+					margin-top: 15px;
+					position: absolute;
+					top:35%;
+					left:3%;
+					width: 98%;
+					height: 75%;
+					font-size: 15px;
+					color: gray;
+				}
+		.contentDB {
+					position: absolute;
+					top: 72%;
+					left: 88%;
+					padding: 8px 8px;
+					border-radius: 10px;
+					background-color: #BBFF66;
+				}
+		.contentDB:hover {
+					border: 1px solid #ffffff;
+					cursor: pointer;
+				}
+		/*上圖*/
+		.background1  {
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-attachment: scroll;
+					position: absolute;
+					top: 0%;
+					left: 0%;
+					width: 100%;
+					height: 40%;
+					z-index: -998;
+				}
+		/*中下底*/
+		.background2 {
+					position: fixed;
+					top: 0%;
+					left: 0%;
+					width: 100%;
+					height: 100%;
+					z-index: -999;
+					background-color: rgba(62, 173, 97, 0.63);
+				}
+		/*個人資訊*/
+		#infoD	{
+					position: fixed;
+					top: 30%;
+					right: -485px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
+					width: 500px;
+					height: 350px;
+					background: #FFCC22;  /*背景顏色*/
+					padding: 10px 20px;
+					border-radius: 10px;  /*圓角*/
+					margin-top: -50px;
+					-webkit-transition:right 0.6s;
+				}
+		#infoD:hover{  /*當滑鼠移至此區塊時，伸縮區塊*/
+					right: 10px;
+					-webkit-transition: 0.6s;
+				}
+		#infoD #title{
+					padding-right: 5px;  /*讓標題與連結中間有空隙*/
+				}
+		#infoT  {
+					position: absolute;
+					top: 70%;
+					left: 4%;
+					width: 11px;
+					height: 50px;
+				}
+		/*資訊黑背景*/
+		#infoDD {
+					position: absolute;
+					background-color: rgba(0, 0, 0, 0.5);
+					top: 2%;
+					left: 55px;
+					width: 80%;
+					height: 330px;
+					padding: 10px 20px;
+					border-radius: 10px;  /*圓角*/
+				}
+		#gotopD {
+					position: fixed;
+					top: 92%;
+					left: 90%;
+					height: 20px;
+					width: 22px;
+					margin-right: 200px;
+					background: rgba(0, 0, 0, 0.6);
+					padding: 10px 20px;
+					border-radius: 10px;  /*圓角*/
+				}
+		#gotopP {
+					text-decoration: none;
+					color: white;
+					cursor: pointer;
+		}
+		/*瀏覽紀錄*/
+		#browsD {
+					position: absolute;
+					top: 28%;
+					left: 74%;
+					width: 15%;
+					height: 470px;
+					background-color: white;
+					padding: 5px 5px;
+					border-radius: 10px;
+					box-shadow:4px 3px 2px 1px #0044BB;
+					
+				}
+		#browsDD {
+					overflow-y: auto;
+					overflow-x; auto;
+					height: 85%;
+					width: 96%;
+					margin-left: 10px;
+				}
+		.browsS {
+					width: 99%;
+					font-size: 17px;
+					color: #0066FF;
+					padding: 2px 2px;
+					border-radius: 10px;
+				}
+		.browsS:hover {
+					background-color: rgba(128, 128, 128, 0.5);
+					color: red;
+				}
+	    .loginOutButton {
+            width: 125px;
+            height: 50px;
+        }
+
+        .getRewardButton {
+            width: 125px;
+            height: 50px;
+            position: relative;
+            //top: 92px;
+			margin-top: 20px;
+			margin-left: 20px;
+        }
+
+        .headImg {
+            width: 200px;
+            height: 220px;
+        }
+        .nchoicedL:hover {
+	        cursor: pointer;
+		}
+		.loginOutButton:hover {
+		    cursor: pointer;
+		}
+		.getRewardButton:hover {
+		  	cursor: pointer;
+		}
+		#searchButton:hover {
+		    cursor: pointer;
+		}
+		.loginInButton:hover {
+		    cursor: pointer;
+		}
+		.singInButton:hover {
+		    cursor: pointer;
+		}
+		.
+	  </style>
+   </head>
+   <body>
+	<div id = "image" class = "background1"></div>
+	<div class = "background2"></div>
+	
+	<div id = "searchD">
+	  <br>
+      <form action = "KeywordSearchServlet" method = "post">
+         <p align = "center">
+			<label class = "searchL">問天&nbsp&nbsp&nbsp
+				<input id = "inputL" name="keyword" type = "text" class = "searchL" placeholder = "輸入你想搜尋的標題...">
+				<input id = "searchButton" type = "submit" value = "Search" class = "searchL">
+			</label>
+			<br>
+			<br>
+			<label id = "undersearch">
+			<!--要加東西-->
+			</label>
+		 </p>
+      </form>
+	</div>
+	
+	<div id = "labelD">
+		<!--寫入左邊標籤-->
+		<%
+			int type = (int) request.getSession().getAttribute("TYPE");
+			//int typen = 0;
+			//typen = Integer.parseInt(type);
+			switch(type)
+			{
+				case(-1):
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp首頁</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+					break;
+				case(0):
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbspBonus</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+					break;
+				case(1):
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp娛樂</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+					break;
+				case(2):
+				    out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp運動</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+				    break;
+				case(3):
+				    out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp財經</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+				    break;
+				case(4):
+				    out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp政治</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+				    break;
+				case(5):
+				    out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp科技</label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=6' style = 'text-decoration: none;'>&nbsp生活</a></label></p>");
+				    break;
+				case(6):
+				    out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=-1' style = 'text-decoration: none;'>&nbsp首頁</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=0' style = 'text-decoration: none;'>&nbspBonus</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=1' style = 'text-decoration: none;'>&nbsp娛樂</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=2' style = 'text-decoration: none;'>&nbsp運動</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=3' style = 'text-decoration: none;'>&nbsp財經</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=4' style = 'text-decoration: none;'>&nbsp政治</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'nchoicedL'><a href = 'PollServlet?type=5' style = 'text-decoration: none;'>&nbsp科技</a></label></p><hr>");
+					out.print("<p align = 'center'><label class = 'choicedL'>&nbsp生活</label></p>");
+				    break;
+			}
+		%>
+	</div>
+	
+	<!--新增標題塊的地方-->
+	<div id = "ContentDiv">
+		<%
+		
+			ArrayList<Polls> displayPoll = (ArrayList<Polls>)request.getAttribute("displayPoll");
+			int count = 0;
+			int i = 0;
+			String image = "img/img.png";
+			
+			if(displayPoll!=null){
+			
+				for(Polls a : displayPoll)
+				{
+					String str = a.getTitle();
+
+					
+		        	str=java.net.URLEncoder.encode(str);
+		        	
+		        	i = 200 + (200 + 5) * count;
+					out.print("<div class = 'contentDiv' style = 'top : " + i + "px;'>"
+							+ "<img src = " + image + " class = 'contentDI'>"
+							+ "<div class = 'contentDD'><div class ='contentDDT'>" + a.getTitle() + "</div><div class='contentDDC'>" + a.getDescription() + "</div></div>"
+							+ "<a href = BrowseRecordServlet?title=" +str +"&url=ShowPollServlet?id="+a.getID() + "><button type='button' class = 'contentDB'>進入問卷</button></a>"
+							+ "</div>");
+					
+					count++;
+				}
+			}
+		%>
+	</div>
+	
+	<div id = "browsD">
+		<p id = "browsP" align = "center">填寫紀錄</p>
+		<hr>
+		<!--新增紀錄的地方-->
+		<div id = "browsDD">
+		<%
+			ArrayList<String> browseRecord = (ArrayList<String>)request.getSession().getAttribute("browseRecord");
+			if(browseRecord != null)
+			{
+				for(String a : browseRecord)
+				{
+					out.print(a);
+				}
+			}
+		%>
+		</div>
+	</div>
+	
+	<div id = "infoD">
+		<span id="title"><<</span>
+		<div id = "infoT">會員資訊</div>
+		<!--塞會員資訊-->
+		<div id = "infoDD">
+		<!--判斷登入狀態-->
+		
+		
+			<table 
+			
+			<%
+			String loginInMessage=(String)request.getSession().getAttribute("loginStatus");
+			System.out.println(request.getSession().getId());
+			System.out.println(loginInMessage);
+			if(loginInMessage!=null && loginInMessage.equals("logIn"))
+			{
+				out.print("style='display: none;'");
+			}
+			%> 
+			
+			
+			>
+					<tr>
+                        <td>
+                            <img src='img/noone.jpg' class='headImg'>
+                        </td>
+                        <td>
+                            <form method='post' action='loginInServlet'>
+                                <h4>帳號:</h4>
+                                <input type='text' class='inputText' name='accountNumber' required='required' />
+                                <h4>密碼:</h4>
+                                <input type='password' class="inputText" name="password" required='required' />
+                                <br>
+								<br>
+                                <input type='submit' value='登入' class='loginInButton' />
+                            </form>
+                        </td>
+                        <td>
+                            <form method='get' action='signInPage.html'>
+                                <input type='submit' value='註冊' class='singInButton'/>
+                            </form>
+                        </td>
+                    </tr>
+            </table>
+			
+			<table 
+			
+			<%
+			loginInMessage=(String)request.getSession().getAttribute("loginStatus");
+			if(loginInMessage==null || !loginInMessage.equals("logIn"))
+			{
+				out.print("style='display: none;'");
+			}
+			%> 
+			
+			
+			
+			>
+                <tr>
+                    <td>
+                        <img src='img/noone.jpg' class='headImg'>
+                    </td>
+                    <td>
+                        <form method='post' action='logoutServlet'>
+                            <h3 style = 'margin-left: 5px;'>名稱 : <span>${nowUser["name"]}</span></h3>
+                            <h3 style = 'margin-left: 5px;'>帳號 : <span>${nowUser["accountNumber"]}</span></h3>
+                            <h3 style = 'margin-left: 5px;'>點數 : <span>${nowUser["point"]}</span></h3>
+                            <input type='submit' value='登出' class='loginOutButton' style = 'margin-left: 5px;' />
+                        </form>
+                    </td>
+		        </tr>
+				<tr>
+                    <td>
+                        <form method='get' action='exchangePage.jsp'>
+                            <input type='submit' value='兌換' class='getRewardButton' />
+                        </form>
+                    </td>
+                </tr>
+            </table>
+			
+		</div>
+		
+	</div>
+	
+	<div id = "gotopD" href = "#top" hidden = "true">
+		<a href = "#top" id = "gotopP">Top</a>
+	</div>
+	
+   </body>
+</html>

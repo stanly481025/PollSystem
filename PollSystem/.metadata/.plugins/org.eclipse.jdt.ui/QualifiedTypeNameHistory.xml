@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.security.SecureRandom"/>
-<fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
-<fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-<fullyQualifiedTypeName name="java.util.StringTokenizer"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="com.google.gson.Gson"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="twitter4j.TwitterStreamFactory"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLEngineResult.Status"/>
+<fullyQualifiedTypeName name="twitter4j.Status"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="twitter4j.conf.ConfigurationBuilder"/>
+<fullyQualifiedTypeName name="twitter4j.auth.OAuthAuthorization"/>
+<fullyQualifiedTypeName name="twitter4j.Paging"/>
+<fullyQualifiedTypeName name="watsonTest.watsonTest.member"/>
+<fullyQualifiedTypeName name="twitter.twitter.testTwitter"/>
+<fullyQualifiedTypeName name="com.google.firebase.database.DatabaseReference"/>
+<fullyQualifiedTypeName name="com.google.firebase.database.ValueEventListener"/>
+<fullyQualifiedTypeName name="com.google.firebase.database.DataSnapshot"/>
+<fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
+<fullyQualifiedTypeName name="com.google.gson.FieldNamingPolicy"/>
+<fullyQualifiedTypeName name="PollData.PollFinished"/>
+<fullyQualifiedTypeName name="Firebase.calculatePollAdapter"/>
+<fullyQualifiedTypeName name="Firebase.FinishedPollAdapter"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="PollData.caculatePoll"/>
+<fullyQualifiedTypeName name="pollSystem.Polls"/>
+<fullyQualifiedTypeName name="account.member"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,7 @@
+INDEX VERSION 1.130
+C:\Users\Stanly Chen\Downloads\twitter_api_Test0621ver1\twitter_api_Test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3283815959.index
+\twitterYa\src\main\java
+D:\大學\大三下\網軟\twitter_api_Test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1821561883.index
+\twitterYa\src\main\resources
+C:\Users\Stanly Chen\Downloads\twitter_api_Test0621ver1\twitter_api_Test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1821561883.index
+\twitterYa\src\main\java

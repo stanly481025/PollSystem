@@ -1,0 +1,123 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>兌換頁面</title>
+    <style>
+        .headImg{
+            width:200px;
+            height:220px;
+        }
+        .backButton{
+            width:100px;
+            height:60px;
+            position:relative;
+            right:600px;
+            font-size:20px;
+        }
+        .getRewardButton{
+            width:100px;
+            height:60px;
+            position:relative;
+            left:800px;
+            font-size:20px;
+        }
+        .itemImg{
+            width:300px;
+            height:200px;
+            position:relative;
+            right:300px;
+        }
+        .itemText{
+            font-size:26px;
+            position:relative;
+            right:120px;
+        }
+        .itemTextField{
+            width:50px;
+            height:50px;
+            font-size:20px;
+            text-align:center;
+        }
+        .needCost{
+            font-size:24px;
+            position:relative;
+            left:500px;
+            bottom:70px;
+        }
+    </style>
+    <script>
+        function countSum()
+        {
+            var totalCost = 0;
+            var reward1 = 0;
+            var reward2 = 0;
+            var reward3 = 0;
+            reward1 = document.getElementsByName("reward1")[0].value
+            reward2 = document.getElementsByName("reward2")[0].value;
+            reward3 = document.getElementsByName("reward3")[0].value;
+            totalCost = parseInt(reward1 * 250 + reward2 * 100 + reward3 * 1);
+            document.getElementById("total").innerHTML = totalCost;
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align:center;">
+      <form action="mainPage.jsp">
+          <input type="submit" value="返回" class="backButton"/>
+          <span style="font-size:48px;">兌換獎勵</span>
+      </form>
+    </div>
+    <hr />
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <img src="noone.jpg" class="headImg">
+                </td>
+                <td>
+                    <form method="post" action="loginInServlet">
+                        <h2>名稱 : <span>${nowUser.name}</span></h2>
+                        <h2>帳號 : <span>${nowUser.accountNumber}</span></h2>
+                        <h2>點數 : <span>${nowUser.point}</span></h2>
+                        <br />
+                        <h2>Bouns關鍵字 : </h2>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <div>
+        <form method= "Post" action="exchangeServlet">
+            <table align="center">
+                <tr style="font-size:22px; text-decoration:underline;">
+                    <td style="position:relative; right:180px;"> 物 品 圖 片</td>
+                    <td> 物 品 名 稱</td>
+                    <td> 兌 換 數 量</td>
+                </tr>
+                <tr>
+                    <td><img src="mmm.jpg" class="itemImg"/></td>
+                    <td class="itemText"> 麥當勞套餐兌換卷 - 250 點數/一份</td>
+                    <td> 兌換數量 : <input type="text" name="reward1" class="itemTextField" value="0" onkeyup="countSum()"/></td>
+                </tr>
+                <tr>
+                    <td><img src="startbark.jpg" class="itemImg"/></td>
+                    <td class="itemText"> 星巴克咖啡類兌換卷 - 100 點數/一份</td>
+                    <td> 兌換數量 : <input type="text" name="reward2" class="itemTextField" value="0" onkeyup="countSum()"/></td>
+                </tr>
+                <tr>
+                    <td><img src="711shopping.png" class="itemImg"/></td>
+                    <td class="itemText"> 7-11購物金50元 - 1點數/一份</td>
+                    <td> 兌換數量 : <input type="text" name="reward3" class="itemTextField" value="0" onkeyup="countSum()"/></td>
+                </tr>
+            </table>
+            <input type="submit" value="兌換" class="getRewardButton" />
+            <h3 class="needCost">所需點數 : <span id="total">0</span></h3>
+        </form>
+    </div>
+   
+</body>
+</html>

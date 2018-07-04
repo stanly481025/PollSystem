@@ -1,7 +1,7 @@
-INDEX VERSION 1.4+C:\Users\Stanly Chen\Desktop\PollSystem\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-4264782386.index
-1291132753.index
-2858063997.index
-22020825.index
-4188697320.index
-3851494256.index
+INDEX VERSION 1.4+C:\Users\Stanly Chen\Downloads\twitter_api_Test0621ver1\twitter_api_Test\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+22908359.index
+1415483670.index
+3287681234.index
+3859836508.index
+1377507955.index
+4240690191.index

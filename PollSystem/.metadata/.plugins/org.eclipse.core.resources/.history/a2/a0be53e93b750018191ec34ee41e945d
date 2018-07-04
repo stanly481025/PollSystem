@@ -1,0 +1,31 @@
+package PollData;
+
+import java.util.ArrayList;
+
+public class caculateOption {
+	private ArrayList<Integer> answerList = new ArrayList<Integer>();
+	
+	public caculateOption() {
+		for(int i=0;i<10;i++) {
+			this.answerList.add(0);
+		}
+	}
+	public ArrayList<Integer> getAnswerList(){
+		return this.answerList;
+	}
+	public void plus_caculate(int index) {
+		int temp=answerList.get(index);
+		//System.out.println(index);
+		//System.out.println("///////////////////////////");
+		//System.out.println(answerList.get(index));
+		answerList.set(index,temp+1);
+		//System.out.println(answerList.get(index));
+	}
+	public void printCaculate() {
+		for(int i=0;i<10;i++) {
+			System.out.print(answerList.get(i));
+		}
+		
+	}
+
+}

@@ -1,0 +1,137 @@
+package account;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import Firebase.FirebaseAdapter;
+
+
+public class loginInServlet extends HttpServlet {
+	Gson gson = new Gson();
+	final FirebaseDatabase database = FirebaseDatabase.getInstance();
+	DatabaseReference ref = database.getReference("server/saving-data/fireblog");
+	DatabaseReference usersRef = ref.child("users");
+	
+	private ArrayList<String> memberList = new ArrayList<String>();
+	 public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException
+	{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		//get from firebase
+		ServletContext sc = getServletContext();
+		//ArrayList<String> tmpmemberList = new ArrayList<String>();
+		//-------------------------------------------------------------------
+		memberList.clear();
+		//memberList=tmpmemberList;
+	    
+		String accountNumber =  request.getParameter("accountNumber");
+		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
+		RequestDispatcher view;	
+		
+		//MemberData  user_data = (MemberData)sc.getAttribute("user_data");
+		//user_data.SelectAllMemberTable(memberList);
+		
+		// select all the member data
+		
+		FirebaseAdapter getmember=  new FirebaseAdapter();
+		memberList=getmember.getAllMember();
+		
+		//login in success
+		for (String a:memberList) {
+			System.out.println(a);
+		}
+			
+		
+		member tempTest = new member("jack","jacky4654","mkiyouh");
+		tempTest.addKeyword("water");
+		tempTest.addKeyword("jhoih");
+		
+		Gson gson= new Gson();
+		String json =gson.toJson(tempTest);
+		
+		System.out.println("tempTest change to the jsonValue"+json);
+		
+		
+		
+		
+		
+		
+		
+		System.out.println("////////////////////////////////////////");
+		System.out.println(session.getId());
+		System.out.println("////////////////////////////////////////");
+		member nowUser = checkAccount(memberList,accountNumber,password);
+		
+		if(nowUser.getAccountNumber()!=null) 
+		{
+			String loginInMessage = "logIn";
+			session.setAttribute("nowUser", nowUser);
+			System.out.println(((member)session.getAttribute("nowUser")).getPoint());
+			session.setAttribute("loginStatus", loginInMessage);
+			//session.setAttribute("accountNumber", nowUser.getAccountNumber());
+			//session.setAttribute("userName", nowUser.getName());
+			//session.setAttribute("userPoint", nowUser.getPoint());
+			
+			view = request.getRequestDispatcher("PollServlet");
+			view.forward(request, response);
+		}
+		else 
+		{
+			String errorMessage = "帳號或密碼輸入錯誤!";
+			sc.setAttribute("errorMessage", errorMessage);
+			
+			view = request.getRequestDispatcher("errorPage.jsp");
+			view.forward(request, response);
+		}
+	}
+	
+	
+	public member checkAccount(ArrayList<String> memberList, String accountNumber, String password) 
+	{
+		member noSearch = new member(null,null,null);
+		
+		for(int i=0;i<memberList.size();i++) 
+		{
+			member temp = gson.fromJson(memberList.get(i), member.class);
+			
+			System.out.println("sssssssssssssssssssssssssssss");
+			System.out.println(memberList.get(i));
+			System.out.println(temp.getAccountNumber());
+			System.out.println(temp.getName());
+			System.out.println(temp.getkeywordList());
+			System.out.println("End get the memberlist data");
+			
+			
+			if(temp.getAccountNumber().equals(accountNumber)) 
+			{
+				if(temp.getPassword().equals(password)) 
+					return temp;
+				else
+					return noSearch;
+			}
+		}
+		return noSearch;
+	}
+
+}
+

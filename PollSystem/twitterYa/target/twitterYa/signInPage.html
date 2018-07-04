@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>註冊成為新會員</title>
+    <style>
+        .textField {
+            width:250px;
+        }
+        .sendButton {
+            width:100px;
+            height:30px;
+            position:relative;
+            left:110px;
+        }
+        .backButton{
+            font-size:18px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <h2>新增會員資料</h2>
+        <form method="post" name="signInForm" action="signInServlet">
+            <h3>會員名稱:</h3>
+            <input type="text" name="userName" class="textField" required="required"/>
+            <h3>會員帳號:</h3>
+            <input type="text" name="accountNumber" class="textField" required="required"/>
+            <h3>會員密碼:</h3>
+            <input type="password" name="password" class="textField" required="required"/>
+            <h3>確認會員密碼</h3>
+            <input type="password" name="passwordCheck" class="textField" required="required"/>
+            <br /> <br />
+            <a href="mainPage.jsp" class="backButton">返回</a>
+            <input type="submit" value="送出" class="sendButton" />
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+package twitter.twitter;
+
+
+import java.util.List;
+
+import twitter4j.Paging;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.OAuthAuthorization;
+import twitter4j.conf.ConfigurationBuilder;
+import account.*;
+
+public class testTwitter {
+	
+	public static String TwitterAPI(member user) 
+	{
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setTweetModeExtended(true); //Plus other options
+        cb.setOAuthAccessToken("999657107438813187-MYiv2qlFXHECAFLepQRydtUvRbU8NsU");
+        cb.setOAuthAccessTokenSecret("Z6wsNHROaAUGzAPWjkxLqXVKKBcuRa7DbHvPfeokVhSFr");
+        cb.setOAuthConsumerKey("2qc6GLB8wBKOUEb5ib8lYET8G");
+        cb.setOAuthConsumerSecret("fC2CHBdGMZHKoGq4eBlJSFZG3XtiSMcRImpPDLs8sfCEbYYX0y");
+        Twitter twitter = new TwitterFactory(cb.build()).getInstance(); 
+        
+        String s = "";
+        try {          
+            int i = 0; 
+            //之後要放user的twitter ID
+            Long uid = twitter.showUser("gvdfjghihdfnkghjdfh").getId();
+            Long maxId = twitter.showUser("gvdfjghihdfnkghjdfh ").getStatus().getId();
+            Paging page = new Paging();
+            page.count(200);
+            page.setMaxId(maxId);
+            
+            List<Status> status = twitter.getUserTimeline(uid, page);
+            
+            do {
+            	s += status.get(i).getText();
+            	i++;
+            }while(i<status.size());
+
+			System.out.println(s);      
+
+
+        } catch (TwitterException e) {
+            System.out.println(e.getStatusCode());
+            e.printStackTrace();
+        }
+		return s;
+    }
+	
+	
+	
+	
+	public static void main(String[] args) {
+        // gets Twitter instance with default credentials
+		
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+        		.setOAuthConsumerKey("cCzYmnSG4NKgVlMYDSfVc0ykI")
+                .setOAuthConsumerSecret("ttPiCLSG2bdwSTx0Jf7rA9HlZEIfw9p0OxBgduJlhQynTosWKt")
+                .setOAuthAccessToken("999697474750005248-Ad0Enutmj5azaJ6I2VZFVkKVmDA55sK")
+                .setOAuthAccessTokenSecret("PP1HLDWpSLnp52VRxbS6vA0BLpXfNRGTEZIu9ROqAcjTV")
+        		.setTweetModeExtended(true);
+		
+        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        
+        try {
+            List<Status> statuses;
+            String user="Stanley88536917";
+            
+
+            statuses = twitter.getUserTimeline(user);
+
+            System.out.println("Showing @" + user + "'s user timeline.");
+            for (Status status : statuses) {
+                System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+            }
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            System.out.println("Failed to get timeline: " + te.getMessage());
+            System.exit(-1);
+        }
+    }
+}

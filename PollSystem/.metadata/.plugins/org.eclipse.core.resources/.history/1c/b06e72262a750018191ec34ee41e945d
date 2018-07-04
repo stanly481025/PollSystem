@@ -1,0 +1,52 @@
+package pollSystem;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import Firebase.FinishedPollAdapter;
+import Firebase.calculatePollAdapter;
+import PollData.PollFinished;
+import PollData.caculatePoll;
+
+public class AnswerServlet extends HttpServlet {
+	//使用者寫完問卷提交後來的地方
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        
+        ArrayList<Integer> pollAnswer = (ArrayList<Integer>) request.getAttribute("pollAnswer"); //取得各題答案
+        String userAccount = (String) request.getSession().getAttribute("account"); //知道回答的人是誰
+        String pollID = (String) request.getParameter("id");
+        //給DB的參數: pollID, userAccount, PollAnswer
+        System.out.println(pollAnswer);
+        PollFinished pf = new PollFinished(pollID, userAccount, pollAnswer);
+        FinishedPollAdapter fpa = new FinishedPollAdapter();
+        fpa.createFinishedPoll(pf);
+        
+        
+        caculatePoll cp = new caculatePoll();
+        calculatePollAdapter cpa = new calculatePollAdapter();
+        String json = cpa.getcaculatePOll(pollID);
+        Gson gson = new Gson();
+        cp = gson.fromJson(json, caculatePoll.class);
+        cp.setQustionAns(pollAnswer);
+        cpa.updateCalaulate(cp, pollID);
+        
+        
+        
+        
+        
+        
+        RequestDispatcher view = request.getRequestDispatcher("mainPage.jsp");
+	    view.forward(request, response);
+        
+	}
+}

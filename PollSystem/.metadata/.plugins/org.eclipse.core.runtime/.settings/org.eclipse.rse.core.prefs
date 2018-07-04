@@ -1,3 +1,4 @@
+activeuserprofiles=MSI-AutumnCAT;Team
 eclipse.preferences.version=1
-org.eclipse.rse.systemtype.local.systemType.defaultUserId=Stanly Chen
-useridperkey=yusiangdeilaptop.Local\=Stanly Chen;
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=AutumnCAT
+useridperkey=MSI-AutumnCAT.Local\=AutumnCAT;

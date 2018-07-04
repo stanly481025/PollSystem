@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+    
+  <servlet>
+	<servlet-name>signInServlet</servlet-name>
+	<servlet-class>account.signInServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>signInServlet</servlet-name>
+	<url-pattern>/signInServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+	<servlet-name>resultServlet</servlet-name>
+	<servlet-class>Firebase.resultServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>resultServlet</servlet-name>
+	<url-pattern>/resultServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+   <servlet>
+	<servlet-name>loginInServlet</servlet-name>
+	<servlet-class>account.loginInServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>loginInServlet</servlet-name>
+	<url-pattern>/loginInServlet</url-pattern>
+  </servlet-mapping>
+
+  
+  <servlet>
+	<servlet-name>logoutServlet</servlet-name>
+	<servlet-class>account.logoutServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>logoutServlet</servlet-name>
+	<url-pattern>/logoutServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>exchangeServlet</servlet-name>
+	<servlet-class>account.exchangeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>exchangeServlet</servlet-name>
+	<url-pattern>/exchangeServlet</url-pattern>
+  </servlet-mapping>
+  
+  <session-config>
+   <session-timeout>30</session-timeout>
+  </session-config>
+ 
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>RetrieveServlet</display-name>
+  	<servlet-name>RetrieveServlet</servlet-name>
+  	<servlet-class>Mypackage.RetrieveServlet</servlet-class>
+  </servlet> 
+  <servlet-mapping>
+  	<servlet-name>RetrieveServlet</servlet-name>
+  	<url-pattern>/RetrieveServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>PollServlet</servlet-name>
+    <servlet-class>pollSystem.PollServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PollServlet</servlet-name>
+    <url-pattern>/PollServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>BrowseRecordServlet</servlet-name>
+    <servlet-class>pollSystem.BrowseRecordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BrowseRecordServlet</servlet-name>
+    <url-pattern>/BrowseRecordServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AnswerServlet</servlet-name>
+    <servlet-class>pollSystem.AnswerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AnswerServlet</servlet-name>
+    <url-pattern>/AnswerServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>KeywordSearchServlet</servlet-name>
+    <servlet-class>pollSystem.KeywordSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KeywordSearchServlet</servlet-name>
+    <url-pattern>/KeywordSearchServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ShowPollServlet</servlet-name>
+    <servlet-class>pollSystem.ShowPollServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowPollServlet</servlet-name>
+    <url-pattern>/ShowPollServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  <context-param>
+        <param-name>filePath</param-name>
+        <param-value>/WEB-INF/myfirebase-a5f4a-firebase-adminsdk-ozzqd-5c8185a9a0.json</param-value>
+   </context-param>
+   <context-param>
+    <param-name>pollMaxNumber</param-name>
+    <param-value>2</param-value>
+  </context-param>
+  
+  
+  <listener>   
+   <listener-class>pkglistener.FirebaseInitialize</listener-class>   
+  </listener>  
+  
+  <listener>
+    <listener-class>
+  		pollSystem.PollServletContextListener
+   	</listener-class>
+  </listener>
+  
+  
+    <welcome-file-list>
+        <welcome-file>PollServlet</welcome-file>
+    </welcome-file-list>
+</web-app>
